@@ -21,6 +21,7 @@ export default function UserList() {
 
   const [nombre, setNombre] = useState('')
   const [cargo, setCargo] = useState('')
+  const [loading, setLoading] = useState(false)
   const [id, setId] = useState('')
   const [conectados, setConectados] = useState([])
   const options = [{ value: 'profesor', label: 'Profesor' }, { value: 'alumno', label: 'Alumno' }]
@@ -42,7 +43,13 @@ export default function UserList() {
 
   const actualizarLista = async () => {
     console.log('id: ', id)
-    setConectados(await verParticipantes(id.toString()))
+
+    setLoading(true)
+    setTimeout(async () => {
+      setConectados(await verParticipantes(id.toString()))
+      setLoading(false)
+    }, 1000);
+
   }
 
 
@@ -93,22 +100,30 @@ export default function UserList() {
 
 
   return (
-    <div>
 
-      <section id="pantalla-inicial">
-        <div id="instrucciones-texto">
-          <p style={{ fontSize: '24.5px', fontWeight: 'bold', textAlign: 'center', marginTop: '45.5px' }}>Pin <b> {id} </b></p>
+    <div align="center" style={{ width: '67.5%', marginLeft: 'auto', marginRight: 'auto', marginTop: '75.5px', backgroundColor: 'white', paddingTop: '14.5px', borderRadius: '7.5px', paddingBottom: '42.5px' }}>
+      <p style={{ fontSize: '24.5px', fontWeight: 'bold', textAlign: 'center', marginTop: '45.5px' }}>Pin <b> {id} </b></p>
 
 
 
-          <button style = {{borderRadius: '7.5px', marginTop: '12.5px'}} onClick={() => { actualizarLista() }}>Actualizar lista</button>
+      <button style={{ borderRadius: '7.5px', marginTop: '12.5px' }} onClick={() => { actualizarLista() }}>Actualizar lista</button>
+      {loading ?
+
+        <div>
+
+          <img src='https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif' style={{ width: '204.5px', marginTop: '42.5px' }} />
 
 
 
+        </div>
+
+        :
+
+        <div>
           {conectados.length > 0 ?
 
-            <div style={{ marginTop: '34.5px' }}>
-              <Table striped bordered hover>
+            <div style={{ marginTop: '34.5px', width: '92.5%' }}>
+              <Table striped bordered hover style={{ borderColor: 'black' }}>
                 <thead>
                   <tr>
                     <th>#</th>
@@ -146,8 +161,12 @@ export default function UserList() {
 
 
             :
-            <p style = {{marginTop: '23.5px', fontSize: '19.5px'}}>No hay ningún estudiante en la sala..</p>
+            <p style={{ marginTop: '34.5px', fontSize: '19.5px' }}>No hay ningún estudiante en la sala..</p>
           }
+
+
+
+
 
 
         </div>
@@ -155,8 +174,14 @@ export default function UserList() {
 
 
 
-      </section>
+      }
+
 
     </div>
+
   );
+
+
+
+
 }

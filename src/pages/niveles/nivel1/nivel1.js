@@ -21,11 +21,12 @@ export default function Nivel1() {
   const history = useNavigate();
   const location = useLocation()
 
-  const [tiempo, setTiempo] = useState(120)
+  const [tiempo, setTiempo] = useState(35)
   const [uid, setUid] = useState('')
-  let tiempoA = 120
+  let tiempoA = 35
 
   const [puntaje, setPuntaje] = useState(0)
+  let puntajeTemp = 0
 
 
 
@@ -40,7 +41,7 @@ export default function Nivel1() {
   useEffect(() => {
 
 
-    setInterval(() => {
+    const interval = setInterval(() => {
 
 
 
@@ -52,13 +53,29 @@ export default function Nivel1() {
         setTiempo((tiempo) => tiempo - 1)
         tiempoA = tiempoA - 1
       } else {
-        actualizarUsuario()
-        history('/')
+        console.log('aca')
+        clearInterval(interval)
+        Swal.fire({
+          icon: 'info',
+          title: 'Se acabó el tiempo!',
+          text: 'Puntaje: ' + puntajeTemp + '/' + questions.length,
+          confirmButtonText: "Siguiente nivel"
+
+        }).then(() => {
+
+          actualizarUsuario()
+          history('/')
+        })
+
       }
       /*
           Run a function or set any state here
       */
     }, 1050);
+
+
+
+    return;
   }, []);
 
 
@@ -143,7 +160,24 @@ export default function Nivel1() {
       setPreguntaActual(preguntaActual + 1)
     } else {
       //alert('ya no hay preguntas.')
-      actualizarUsuario()
+
+
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Acabaste las preguntas!',
+        text: 'Puntaje: ' + puntajeTemp + '/' + questions.length,
+        confirmButtonText: "Siguiente nivel"
+
+      }).then(() => {
+
+        actualizarUsuario()
+        history('/')
+      })
+
+
+      //actualizarUsuario()
+      //history('/')
     }
   }
 
@@ -153,7 +187,8 @@ export default function Nivel1() {
   const checkAnswer = (index) => {
     if (questions[preguntaActual].correctAnswer === index) {
 
-
+      setPuntaje(puntaje + 1)
+      puntajeTemp = puntajeTemp + 1
 
       Swal.fire({
         icon: 'success',
@@ -162,7 +197,7 @@ export default function Nivel1() {
         confirmButtonText: "Siguiente"
 
       }).then(() => {
-        setPuntaje(puntaje + 1)
+
         siguientePregunta()
       })
 
@@ -216,14 +251,14 @@ export default function Nivel1() {
 
 
 
-        <div align='center' style = {{backgroundColor: 'red', width: '97.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px'}}>
-          <p style = {{fontSize: '19.5px'}}>Puntaje <br/>{puntaje}</p>
+        <div align='center' style={{ backgroundColor: 'red', width: '97.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px' }}>
+          <p style={{ fontSize: '19.5px' }}>Puntaje <br />{puntaje}</p>
           <p style={{ fontSize: '24.5px', borderRadius: '9.75px' }}></p>
         </div>
 
         <section id="pantalla-inicial">
 
-          <button disabled = {true} style={{ backgroundColor: 'green', width: '59.5px', height: '45.5px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'black', textAlign: 'center', marginTop: '14.5px' }} align='center'>
+          <button disabled={true} style={{ backgroundColor: 'green', width: '59.5px', height: '45.5px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'black', textAlign: 'center', marginTop: '14.5px' }} align='center'>
             <p>{tiempo}</p>
           </button>
 
