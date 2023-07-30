@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
 import { verParticipantes, crearId } from '../../api/api';
 import Table from 'react-bootstrap/Table';
+import { BsFillCloudCheckFill } from 'react-icons/bs';
 
 
 
@@ -111,7 +112,7 @@ export default function UserList() {
 
         <div>
 
-          <img src='https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif' style={{ width: '204.5px', marginTop: '42.5px' }} />
+          <img src='https://www.superiorlawncareusa.com/wp-content/uploads/2020/05/loading-gif-png-5.gif' style={{ width: '175.5px', marginTop: '42.5px' }} />
 
 
 
@@ -126,12 +127,12 @@ export default function UserList() {
               <Table striped bordered hover style={{ borderColor: 'black' }}>
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th>Usuario</th>
-                    <th>Nivel 1</th>
-                    <th>Nivel 2</th>
-                    <th>Nivel 3</th>
-                    <th>Calificación</th>
+                    <th style = {{textAlign: 'center'}}>#</th>
+                    <th style = {{textAlign: 'center'}}>Usuario</th>
+                    <th style = {{textAlign: 'center'}}>Nivel 1</th>
+                    <th style = {{textAlign: 'center'}}>Nivel 2</th>
+                    <th style = {{textAlign: 'center'}}>Nivel 3</th>
+                    <th style = {{textAlign: 'center'}}>Calificación</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,12 +141,12 @@ export default function UserList() {
 
                   {conectados.map((dato, index) => (
                     <tr>
-                      <td>{index + 1}</td>
-                      <td>{dato.Usuario}</td>
-                      <td>{dato.Nivel < 1 ? "-" : "Terminado"}</td>
-                      <td>{dato.Nivel < 2 ? "-" : "Terminado"}</td>
-                      <td>{dato.Nivel < 3 ? "-" : "Terminado"}</td>
-                      <td>{dato.Calificacion === -5 ? 'Aún no termina' : dato.Calificacion}</td>
+                      <td style = {{textAlign: 'center'}}>{index + 1}</td>
+                      <td style = {{textAlign: 'center'}}>{dato.Usuario}</td>
+                      <td style = {{textAlign: 'center'}}>{dato.Nivel < 1 ? "-" : <BsFillCloudCheckFill size = {28} color = 'green'/>}</td>
+                      <td style = {{textAlign: 'center'}}>{dato.Nivel < 2 ? "-" : <BsFillCloudCheckFill color = 'green'/>}</td>
+                      <td style = {{textAlign: 'center'}}>{dato.Nivel < 3 ? "-" : <BsFillCloudCheckFill color = 'green'/>}</td>
+                      <td style = {{textAlign: 'center'}}>{dato.Calificacion === -5 ? 'Aún no termina' : dato.Calificacion}</td>
                     </tr>
 
 

@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { useNavigate, useLocation } from "react-router-dom";
 import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { FcAlarmClock } from 'react-icons/fc';
 
 import 'sweetalert2/src/sweetalert2.scss'
 import './nivel1.css'
@@ -21,9 +22,9 @@ export default function Nivel1() {
   const history = useNavigate();
   const location = useLocation()
 
-  const [tiempo, setTiempo] = useState(35)
+  const [tiempo, setTiempo] = useState(355)
   const [uid, setUid] = useState('')
-  let tiempoA = 35
+  let tiempoA = 355
 
   const [puntaje, setPuntaje] = useState(0)
   let puntajeTemp = 0
@@ -58,7 +59,7 @@ export default function Nivel1() {
         Swal.fire({
           icon: 'info',
           title: 'Se acabó el tiempo!',
-          text: 'Puntaje: ' + puntajeTemp + '/' + questions.length,
+          text: 'Puntaje: ' + puntaje + '/' + questions.length,
           confirmButtonText: "Siguiente nivel"
 
         }).then(() => {
@@ -81,6 +82,8 @@ export default function Nivel1() {
 
 
   const actualizarUsuario = () => {
+
+    console.log('actualizar: ', puntaje, puntajeTemp)
 
     actualizarParticipante(location.state.uid, puntaje, 1)
 
@@ -166,7 +169,7 @@ export default function Nivel1() {
       Swal.fire({
         icon: 'success',
         title: 'Acabaste las preguntas!',
-        text: 'Puntaje: ' + puntajeTemp + '/' + questions.length,
+        text: 'Puntaje: ' + puntaje + '/' + questions.length,
         confirmButtonText: "Siguiente nivel"
 
       }).then(() => {
@@ -247,31 +250,33 @@ export default function Nivel1() {
 
   return (
     <>
-      <div>
+      <div align = 'center'>
 
 
 
-        <div align='center' style={{ backgroundColor: 'red', width: '97.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px' }}>
-          <p style={{ fontSize: '19.5px' }}>Puntaje <br />{puntaje}</p>
-          <p style={{ fontSize: '24.5px', borderRadius: '9.75px' }}></p>
-        </div>
+        <div align='center' style={{ backgroundColor: '#97CBEB', width: '105.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px' }}>
+          <p style={{ fontSize: '24.5px' }}>Puntaje <br /><b>{puntaje}</b></p>
+        </div> 
 
-        <section id="pantalla-inicial">
+        <div align = 'center' style = {{}}>
 
-          <button disabled={true} style={{ backgroundColor: 'green', width: '59.5px', height: '45.5px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'black', textAlign: 'center', marginTop: '14.5px' }} align='center'>
-            <p>{tiempo}</p>
+        <div style = {{backgroundColor: 'white', width: '59.5%', borderRadius: '24.5px', marginTop: '37.5px', marginleft: '125px', marginRight: '75px', paddingBottom: '14.5px'}}>
+
+          <button disabled={true} style={{ backgroundColor: 'transparent', width: '67.5px', height: '89.75px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'red', textAlign: 'center', marginTop: '14.5px', border: '1.5px solid black' }} align='center'>
+            <FcAlarmClock size = {37}/>
+            <p style = {{color: 'black'}}>{tiempo}</p>
           </button>
 
 
           <div id="instrucciones-texto">
-            <p style={{ fontSize: '21.75px', fontWeight: 'bold', width: '85%', marginLeft: 'auto', marginRight: 'auto', marginTop: '14.5px' }}>{preguntaActual + 1 + ") "} {questions[preguntaActual].question}</p>
+            <p style={{ fontSize: '21.75px', fontWeight: 'bold', width: '85%', marginLeft: 'auto', marginRight: 'auto', marginTop: '14.5px', marginBottom: '27.5px' }}>{preguntaActual + 1 + ") "} {questions[preguntaActual].question}</p>
 
             <div>
 
               {questions[preguntaActual].answers.map((respuesta, index) => (
 
                 <div>
-                  <button className="botonOpcion" style={{ width: respuesta.length > 18 ? '475px' : '475px' }} onClick={() => { checkAnswer(index) }}>{respuesta}</button>
+                  <button className="botonOpcion" style={{ width: respuesta.length > 22 ? '475px' : '375px' }} onClick={() => { checkAnswer(index) }}>{respuesta}</button>
 
 
 
@@ -296,8 +301,10 @@ export default function Nivel1() {
 
 
 
-        </section>
+        </div>
 
+
+</div>
       </div>
     </>
   );
