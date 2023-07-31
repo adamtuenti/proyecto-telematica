@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select';
 import { useNavigate, useLocation } from "react-router-dom";
 import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
 import { FcAlarmClock } from 'react-icons/fc';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import './nivel1.css'
 
@@ -22,9 +21,9 @@ export default function Nivel1() {
   const history = useNavigate();
   const location = useLocation()
 
-  const [tiempo, setTiempo] = useState(355)
+  const [tiempo, setTiempo] = useState(5)
   const [uid, setUid] = useState('')
-  let tiempoA = 355
+  let tiempoA = 5
 
   const [puntaje, setPuntaje] = useState(0)
   let puntajeTemp = 0
@@ -39,45 +38,7 @@ export default function Nivel1() {
 
 
 
-  useEffect(() => {
-
-
-    const interval = setInterval(() => {
-
-
-
-
-
-      if (tiempoA > 0) {
-
-        console.log('aqui')
-        setTiempo((tiempo) => tiempo - 1)
-        tiempoA = tiempoA - 1
-      } else {
-        console.log('aca')
-        clearInterval(interval)
-        Swal.fire({
-          icon: 'info',
-          title: 'Se acabó el tiempo!',
-          text: 'Puntaje: ' + puntaje + '/' + questions.length,
-          confirmButtonText: "Siguiente nivel"
-
-        }).then(() => {
-
-          actualizarUsuario()
-          history('/')
-        })
-
-      }
-      /*
-          Run a function or set any state here
-      */
-    }, 1050);
-
-
-
-    return;
-  }, []);
+  
 
 
 
@@ -86,6 +47,7 @@ export default function Nivel1() {
     console.log('actualizar: ', puntaje, puntajeTemp)
 
     actualizarParticipante(location.state.uid, puntaje, 1)
+    history('/nivel2')
 
 
 
@@ -99,6 +61,7 @@ export default function Nivel1() {
 
 
   const [preguntaActual, setPreguntaActual] = useState(0)
+  let preguntaActualTemp = 0;
 
 
 
@@ -159,6 +122,7 @@ export default function Nivel1() {
 
 
   const siguientePregunta = () => {
+    preguntaActualTemp = preguntaActualTemp + 1
     if (preguntaActual < questions.length - 1) {
       setPreguntaActual(preguntaActual + 1)
     } else {
@@ -175,7 +139,6 @@ export default function Nivel1() {
       }).then(() => {
 
         actualizarUsuario()
-        history('/')
       })
 
 
@@ -248,43 +211,103 @@ export default function Nivel1() {
 
 
 
+
+  useEffect(() => {
+
+
+    const interval = setInterval(() => {
+
+
+
+      console.log(preguntaActual, questions.length, preguntaActualTemp)
+      if (preguntaActual === questions.length) {
+        console.log('entro')
+        clearInterval(interval)
+      }
+
+
+
+
+      if (tiempoA > 0) {
+
+        console.log('aqui')
+        setTiempo((tiempo) => tiempo - 1)
+        tiempoA = tiempoA - 1
+      } else {
+        console.log('aca')
+        clearInterval(interval)
+        Swal.fire({
+          icon: 'info',
+          title: 'Se acabó el tiempo!',
+          text: 'Puntaje: ' + puntaje + '/' + questions.length,
+          confirmButtonText: "Siguiente nivel"
+
+        }).then(() => {
+
+          actualizarUsuario()
+          
+        })
+
+      }
+      /*
+          Run a function or set any state here
+      */
+    }, 1050);
+
+
+
+    return;
+  }, []);
+
+
+
+
+
   return (
     <>
-      <div align = 'center'>
+      <div align='center'>
 
 
 
         <div align='center' style={{ backgroundColor: '#97CBEB', width: '105.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px' }}>
           <p style={{ fontSize: '24.5px' }}>Puntaje <br /><b>{puntaje}</b></p>
-        </div> 
+        </div>
 
-        <div align = 'center' style = {{}}>
+        <div align='center' style={{}}>
 
-        <div style = {{backgroundColor: 'white', width: '59.5%', borderRadius: '24.5px', marginTop: '37.5px', marginleft: '125px', marginRight: '75px', paddingBottom: '14.5px'}}>
+          <div style={{ backgroundColor: 'white', width: '59.5%', borderRadius: '24.5px', marginTop: '37.5px', marginleft: '125px', marginRight: '75px', paddingBottom: '14.5px' }}>
 
-          <button disabled={true} style={{ backgroundColor: 'transparent', width: '67.5px', height: '89.75px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'red', textAlign: 'center', marginTop: '14.5px', border: '1.5px solid black' }} align='center'>
-            <FcAlarmClock size = {37}/>
-            <p style = {{color: 'black'}}>{tiempo}</p>
-          </button>
-
-
-          <div id="instrucciones-texto">
-            <p style={{ fontSize: '21.75px', fontWeight: 'bold', width: '85%', marginLeft: 'auto', marginRight: 'auto', marginTop: '14.5px', marginBottom: '27.5px' }}>{preguntaActual + 1 + ") "} {questions[preguntaActual].question}</p>
-
-            <div>
-
-              {questions[preguntaActual].answers.map((respuesta, index) => (
-
-                <div>
-                  <button className="botonOpcion" style={{ width: respuesta.length > 22 ? '475px' : '375px' }} onClick={() => { checkAnswer(index) }}>{respuesta}</button>
+            <button disabled={true} style={{ backgroundColor: 'transparent', width: '67.5px', height: '89.75px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'red', textAlign: 'center', marginTop: '14.5px', border: '1.5px solid black' }} align='center'>
+              <FcAlarmClock size={37} />
+              <p style={{ color: 'black' }}>{tiempo}</p>
+            </button>
 
 
+            <div id="instrucciones-texto">
+              <p style={{ fontSize: '21.75px', fontWeight: 'bold', width: '85%', marginLeft: 'auto', marginRight: 'auto', marginTop: '14.5px', marginBottom: '27.5px' }}>{preguntaActual + 1 + ") "} {questions[preguntaActual].question}</p>
 
-                </div>
+              <div>
 
-              ))
+                {questions[preguntaActual].answers.map((respuesta, index) => (
 
-              }
+                  <div>
+                    <button className="botonOpcion" style={{ width: respuesta.length > 22 ? '475px' : '375px' }} onClick={() => { checkAnswer(index) }}>{respuesta}</button>
+
+
+
+                  </div>
+
+                ))
+
+                }
+
+
+
+              </div>
+
+
+
+
 
 
 
@@ -293,18 +316,10 @@ export default function Nivel1() {
 
 
 
-
-
-
           </div>
 
 
-
-
         </div>
-
-
-</div>
       </div>
     </>
   );
