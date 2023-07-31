@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './nivel2.css'
 import { Container, Col, Row, Button } from 'react-bootstrap';
+
+
+
+import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
+
+
+
+
 import pista1 from './pista1.jpg'
 import pista2 from './pista2.jpg'
 import pista3 from './pista3.jpg'
@@ -17,6 +25,10 @@ import { FiArchive } from "react-icons/fi";
 
 
 
+import { useNavigate, useLocation } from "react-router-dom";
+
+
+
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
@@ -26,6 +38,10 @@ import arrayShuffle from 'array-shuffle';
 
 
 export default function Nivel2() {
+
+
+
+    const location = useLocation()
 
     let arrayPasos = [{ text: '1: ', respuesta: '', idRespuesta: 0 }, { text: '2: ', respuesta: '', idRespuesta: 1 }, { text: '3: ', respuesta: '', idRespuesta: 2 }, { text: '4: ', respuesta: '', idRespuesta: 3 }, { text: '5: ', respuesta: '', idRespuesta: 4 }, { text: '6: ', respuesta: '', idRespuesta: 5 }, { text: '7: ', respuesta: '', idRespuesta: 6 }, { text: '8: ', respuesta: '', idRespuesta: 7 }]
     let arrayPreguntas = [{ text: 'Convertir la máscara de red a binario', id: 0 }, { text: 'Contar los bits de subred', id: 1 }, { text: 'Determinar cuántas subredes necesitamos', id: 2 }, { text: 'Calcular la cantidad de bits de subred necesarios', id: 3 }, { text: 'Encontrar la nueva máscara de subred', id: 4 }, { text: 'Calcular las direcciones de red de cada subred', id: 5 }, { text: 'Calcular la cantidad de hosts por subred', id: 6 }, { text: 'Contar los bits de subred', id: 1 }]
@@ -88,11 +104,12 @@ export default function Nivel2() {
         if(array.length < arrayPreguntas.length){
             arrayRespuestas.push(texto)
             let temp = [ ...array ]
+            let data = {text: texto, id: valor}
             //console.log('temp: ', temp)
             //let ind = array.indexOf('')
             //temp[ind] = texto
             //setArray(temp)
-            temp.push(texto)
+            temp.push(data)
             console.log(array, indice, texto, temp)
             setArray(temp)
         }else{
@@ -112,6 +129,42 @@ export default function Nivel2() {
             temp = temp.slice(0, -1)
             console.log(array, temp)
             setArray(temp)
+    }
+
+
+
+    const verificarResultados = () => {
+        let total = 0;
+        console.log(array, arrayPasos)
+        for(let i = 0; i < array.length; i ++){
+            let dataRespuesta = array[i]
+            let dataCorrecto = arrayPasos[i]
+            if(dataRespuesta.id === dataCorrecto.idRespuesta){
+                total = total + 1
+            }
+        }
+
+
+
+        //alert(total)
+
+
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Acabaste las preguntas!',
+            text: 'Puntaje: ' + total + '/' + array.length,
+            confirmButtonText: "Siguiente nivel"
+    
+          }).then(() => {
+
+
+
+            actualizarParticipante(location.state.uid, total, 2)
+            //history('/nivel2')
+    
+            //actualizarUsuario()
+          })
     }
 
 
@@ -172,7 +225,7 @@ export default function Nivel2() {
 
 
                                 <Col style={{ textAlign: 'left' }}>
-                                    <p>{array[index]}</p>
+                                    {(array.length >= 1 && index < array.length) && <p>{array[index].text}</p>}
 
 
 
@@ -205,7 +258,7 @@ export default function Nivel2() {
 
 
 
-                                <Button disabled = {array.length == arrayPreguntasSet.length} style={{ width: '97.5%', height: '45px', marginBottom: '12.5px', fontSize: '19.5px' }} onClick={() => { rellenarRespuesta(index, pregunta.text, pregunta.index) }}>{pregunta.text}</Button>
+                                <Button disabled = {array.length == arrayPreguntasSet.length} style={{ width: '97.5%', height: '45px', marginBottom: '12.5px', fontSize: '19.5px' }} onClick={() => { rellenarRespuesta(index, pregunta.text, pregunta.id) }}>{pregunta.text} {array.length}</Button>
 
                             ))
                         }
@@ -223,7 +276,7 @@ export default function Nivel2() {
 
 
                 
-                {array.length === arrayPreguntasSet.length && <Button>Siguiente</Button>}
+                {array.length === arrayPreguntasSet.length && <Button onClick = {() => {verificarResultados()}}>Terminar</Button>}
 
 
 

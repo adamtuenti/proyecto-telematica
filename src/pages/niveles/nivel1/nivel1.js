@@ -21,9 +21,9 @@ export default function Nivel1() {
   const history = useNavigate();
   const location = useLocation()
 
-  const [tiempo, setTiempo] = useState(5)
+  const [tiempo, setTiempo] = useState(45)
   const [uid, setUid] = useState('')
-  let tiempoA = 5
+  let tiempoA = 45
 
   const [puntaje, setPuntaje] = useState(0)
   let puntajeTemp = 0
@@ -47,7 +47,7 @@ export default function Nivel1() {
     console.log('actualizar: ', puntaje, puntajeTemp)
 
     actualizarParticipante(location.state.uid, puntaje, 1)
-    history('/nivel2')
+    history('/nivel2', {state: {uid: location.state.uid}})
 
 
 
