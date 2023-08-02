@@ -3,6 +3,15 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select';
 import { useNavigate, useLocation } from "react-router-dom";
 import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
+
+
+
+import { Container, Col, Row, Button } from 'react-bootstrap';
+
+
+
+
+
 import { FcAlarmClock } from 'react-icons/fc';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
@@ -277,10 +286,10 @@ export default function Nivel1() {
 
           <div style={{ backgroundColor: 'white', width: '59.5%', borderRadius: '24.5px', marginTop: '37.5px', marginleft: '125px', marginRight: '75px', paddingBottom: '14.5px' }}>
 
-            <button disabled={true} style={{ backgroundColor: 'transparent', width: '67.5px', height: '89.75px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'red', textAlign: 'center', marginTop: '14.5px', border: '1.5px solid black' }} align='center'>
+            <Button disabled={true} style={{ backgroundColor: 'transparent', width: '67.5px', height: '89.75px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'red', textAlign: 'center', marginTop: '14.5px', border: '1.5px solid black' }} align='center'>
               <FcAlarmClock size={37} />
               <p style={{ color: 'black' }}>{tiempo}</p>
-            </button>
+            </Button>
 
 
             <div id="instrucciones-texto">
@@ -291,7 +300,7 @@ export default function Nivel1() {
                 {questions[preguntaActual].answers.map((respuesta, index) => (
 
                   <div>
-                    <button className="botonOpcion" style={{ width: respuesta.length > 22 ? '475px' : '375px' }} onClick={() => { checkAnswer(index) }}>{respuesta}</button>
+                    <Button className="botonOpcion" style={{ width: respuesta.length > 22 ? '475px' : '375px' }} onClick={() => { checkAnswer(index) }}>{respuesta}</Button>
 
 
 

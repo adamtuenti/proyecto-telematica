@@ -5,6 +5,10 @@ import { useNavigate, useLocation  } from "react-router-dom";
 import { validarSala, agregarUsuarioParticipante } from '../../api/api';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
+
+
+import { Container, Col, Row, Button } from 'react-bootstrap';
+
 import 'sweetalert2/src/sweetalert2.scss'
 
 
@@ -28,10 +32,12 @@ export default function WaitingRoom() {
 
     const [sala, setSala] = useState('')
     const [estado, setEstado] = useState('')
+    const [validando, setValidando] = useState(false)
 
 
 
     const validarSalaPage = async() => {
+      setValidando(true)
       let respuesta = await validarSala(sala)
         setEstado(respuesta)
 
@@ -42,6 +48,10 @@ export default function WaitingRoom() {
             title: 'Oops...',
             text: 'No existe ese id aun...',
           })
+
+
+
+          setValidando(false)
           
 
         }else{
@@ -75,7 +85,7 @@ export default function WaitingRoom() {
 
     </div>
 
-    <button onClick = {() => {validarSalaPage()}} id="iniciar">INICIAR</button>
+    <Button disabled = {validando} onClick = {() => {validarSalaPage()}} id="iniciar">INICIAR</Button>
   
 
 
