@@ -30,9 +30,9 @@ export default function Nivel1() {
   const history = useNavigate();
   const location = useLocation()
 
-  const [tiempo, setTiempo] = useState(45)
+  const [tiempo, setTiempo] = useState(15)
   const [uid, setUid] = useState('')
-  let tiempoA = 45
+  let tiempoA = 15
 
   const [puntaje, setPuntaje] = useState(0)
   let puntajeTemp = 0
@@ -56,7 +56,7 @@ export default function Nivel1() {
     console.log('actualizar: ', puntaje, puntajeTemp)
 
     actualizarParticipante(location.state.uid, puntaje, 1)
-    history('/nivel2', {state: {uid: location.state.uid}})
+    history('/nivel2', {state: {uid: location.state.uid, puntos: puntaje}})
 
 
 
@@ -67,6 +67,7 @@ export default function Nivel1() {
   const [sala, setSala] = useState('')
   const [estado, setEstado] = useState('')
   const [respuestas, setRespuestas] = useState(['', ''])
+  const paginaActual = window.location.href;
 
 
   const [preguntaActual, setPreguntaActual] = useState(0)
@@ -219,18 +220,44 @@ export default function Nivel1() {
 
 
 
+  const a = () => {
+    console.log(preguntaActual, preguntaActualTemp, 'hola')
+  }
+
+
+
+  const tiempoTerminado = () => {
+    Swal.fire({
+      icon: 'info',
+      title: 'Se acabó el tiempo!',
+      text: 'Puntaje: ' + puntaje + '/' + questions.length,
+      confirmButtonText: "Siguiente nivel"
+
+    }).then(() => {
+
+      actualizarUsuario()
+      
+    })
+  }
+
+  let interval;
 
 
   useEffect(() => {
 
 
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
+
+
+      console.log('cada: ', window.location.href, puntaje, paginaActual)
+
+      //a()
 
 
 
       console.log(preguntaActual, questions.length, preguntaActualTemp)
       if (preguntaActual === questions.length) {
-        console.log('entro')
+        console.log('entro aqui')
         clearInterval(interval)
       }
 
@@ -239,23 +266,18 @@ export default function Nivel1() {
 
       if (tiempoA > 0) {
 
-        console.log('aqui')
+        console.log('aqui: ', window.location.href)
         setTiempo((tiempo) => tiempo - 1)
         tiempoA = tiempoA - 1
       } else {
-        console.log('aca')
+        console.log('aca: ', window.location.href)
         clearInterval(interval)
-        Swal.fire({
-          icon: 'info',
-          title: 'Se acabó el tiempo!',
-          text: 'Puntaje: ' + puntaje + '/' + questions.length,
-          confirmButtonText: "Siguiente nivel"
 
-        }).then(() => {
-
-          actualizarUsuario()
-          
-        })
+        if(window.location.href === paginaActual){
+          tiempoTerminado()
+        }
+        
+        
 
       }
       /*
@@ -279,7 +301,7 @@ export default function Nivel1() {
 
 
         <div align='center' style={{ backgroundColor: '#97CBEB', width: '105.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px' }}>
-          <p style={{ fontSize: '24.5px' }}>Puntaje <br /><b>{puntaje}</b></p>
+          <p style={{ fontSize: '24.5px' }}>Puntaje <br /><b>{puntaje} {preguntaActual} {preguntaActualTemp}</b></p>
         </div>
 
         <div align='center' style={{}}>

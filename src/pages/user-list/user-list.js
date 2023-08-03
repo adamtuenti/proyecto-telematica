@@ -145,7 +145,7 @@ export default function UserList() {
                       <td style = {{textAlign: 'center'}}>{dato.Usuario}</td>
                       <td style = {{textAlign: 'center'}}>{dato.Nivel < 1 ? "-" : <BsFillCloudCheckFill size = {28} color = 'green'/>}</td>
                       <td style = {{textAlign: 'center'}}>{dato.Nivel < 2 ? "-" : <BsFillCloudCheckFill size = {28} color = 'green'/>}</td>
-                      <td style = {{textAlign: 'center'}}>{dato.Nivel < 3 ? "-" : <BsFillCloudCheckFill color = 'green'/>}</td>
+                      <td style = {{textAlign: 'center'}}>{dato.Nivel < 3 ? "-" : <BsFillCloudCheckFill size = {28} color = 'green'/>}</td>
                       <td style = {{textAlign: 'center'}}>{dato.Calificacion === -5 ? 'Aún no termina' : dato.Calificacion}</td>
                     </tr>
 

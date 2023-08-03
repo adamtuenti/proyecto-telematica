@@ -42,6 +42,7 @@ export default function Nivel2() {
 
 
     const location = useLocation()
+    const history = useNavigate()
 
     let arrayPasos = [{ text: '1: ', respuesta: '', idRespuesta: 0 }, { text: '2: ', respuesta: '', idRespuesta: 1 }, { text: '3: ', respuesta: '', idRespuesta: 2 }, { text: '4: ', respuesta: '', idRespuesta: 3 }, { text: '5: ', respuesta: '', idRespuesta: 4 }, { text: '6: ', respuesta: '', idRespuesta: 5 }, { text: '7: ', respuesta: '', idRespuesta: 6 }, { text: '8: ', respuesta: '', idRespuesta: 7 }]
     let arrayPreguntas = [{ text: 'Convertir la máscara de red a binario', id: 0 }, { text: 'Contar los bits de subred', id: 1 }, { text: 'Determinar cuántas subredes necesitamos', id: 2 }, { text: 'Calcular la cantidad de bits de subred necesarios', id: 3 }, { text: 'Encontrar la nueva máscara de subred', id: 4 }, { text: 'Calcular las direcciones de red de cada subred', id: 5 }, { text: 'Calcular la cantidad de hosts por subred', id: 6 }, { text: 'Contar los bits de subred', id: 1 }]
@@ -134,7 +135,7 @@ export default function Nivel2() {
 
 
     const verificarResultados = () => {
-        let total = 0;
+        let total = location.state.puntos;
         console.log(array, arrayPasos)
         for(let i = 0; i < array.length; i ++){
             let dataRespuesta = array[i]
@@ -146,6 +147,7 @@ export default function Nivel2() {
 
 
 
+
         //alert(total)
 
 
@@ -153,7 +155,7 @@ export default function Nivel2() {
         Swal.fire({
             icon: 'success',
             title: 'Acabaste las preguntas!',
-            text: 'Puntaje: ' + total + '/' + array.length,
+            text: 'Puntaje: ' + total,
             confirmButtonText: "Siguiente nivel"
     
           }).then(() => {
@@ -161,7 +163,7 @@ export default function Nivel2() {
 
 
             actualizarParticipante(location.state.uid, total, 2)
-            //history('/nivel2')
+            history('/nivel3', {state: {puntos: total, uid: location.state.uid}})
     
             //actualizarUsuario()
           })

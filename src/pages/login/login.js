@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 
 
+import { Container, Col, Row, Button } from 'react-bootstrap';
+
+
+
 export default function Login() {
 
 
@@ -58,7 +62,7 @@ export default function Login() {
 
           </div>
 
-          <button disabled={nombre === '' || cargo === ''} onClick={() => { cambiarPestana() }} id="iniciar">INICIAR</button>
+          <Button disabled={nombre === '' || cargo === ''} onClick={() => { cambiarPestana() }} id="iniciar">INICIAR</Button>
 
 
 

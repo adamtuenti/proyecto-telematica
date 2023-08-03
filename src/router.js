@@ -6,6 +6,7 @@ import WaitingRoom from "./pages/waiting-room/waiting-room";
 import UserList from "./pages/user-list/user-list";
 import Nivel1 from "./pages/niveles/nivel1/nivel1";
 import Nivel2 from "./pages/niveles/nivel2/nivel2";
+import Nivel3 from "./pages/niveles/nivel3/nivel3";
 
 
 
@@ -22,6 +23,7 @@ const RouterPage = () => {
                 <Route exact path = '/waiting-room' element = {<WaitingRoom/>} />
                 <Route exact path = '/nivel1' element = {<Nivel1/>} />
                 <Route exact path = '/nivel2' element = {<Nivel2/>} />
+                <Route exact path = '/nivel3' element = {<Nivel3/>} />
             </Routes>
 
 

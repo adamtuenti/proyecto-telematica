@@ -1,0 +1,284 @@
+import React, { useState, useEffect } from 'react'
+//import './login.css';
+import Select from 'react-select';
+import { useNavigate, useLocation } from "react-router-dom";
+import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
+
+
+
+import { Container, Col, Row, Button } from 'react-bootstrap';
+
+
+
+
+
+import { FcAlarmClock } from 'react-icons/fc';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+
+import imagen1 from './imagen1.jpg'
+import imagen2 from './imagen2.jpg'
+//import './nivel1.css'
+
+
+
+
+
+
+
+export default function Nivel3() {
+
+
+
+    const history = useNavigate();
+    const location = useLocation()
+
+    const [tiempo, setTiempo] = useState(45)
+    const [uid, setUid] = useState('')
+    let tiempoA = 45
+
+    const [puntaje, setPuntaje] = useState(0)
+    let puntajeTemp = location.state.puntos
+
+
+
+    useEffect(() => {
+        setUid(location.state.uid);
+        setPuntaje(location.state.puntos)
+        //alert(location.state.uid)
+    }, [])
+
+
+
+
+
+
+
+
+    const actualizarUsuario = () => {
+
+        console.log('actualizar: ', puntaje, puntajeTemp)
+
+        actualizarParticipante(location.state.uid, puntajeTemp, 3)
+        //history('/nivel2', { state: { uid: location.state.uid } })
+
+
+
+    }
+
+
+
+    const [sala, setSala] = useState('')
+    const [estado, setEstado] = useState('')
+    const [respuestas, setRespuestas] = useState(['', ''])
+
+
+    const [preguntaActual, setPreguntaActual] = useState(0)
+    let preguntaActualTemp = 0;
+
+
+
+
+    const questions = [
+        {
+            question: "En la siguiente topología, ¿cuantas redes existen?",
+            answers: ["A) 3", "B) 4", "C) 7"],
+            correctAnswer: 2,
+            imagen: imagen1
+        },
+        {
+            question: "En la siguiente topología, para comenzar un subneteo con VLSM ¿con que red debemos comenzar?",
+            answers: ["A) Net A", "B) Net B", "C) Net C"],
+            correctAnswer: 0,
+            imagen: imagen2
+        }
+    ];
+
+
+
+    const siguientePregunta = () => {
+        preguntaActualTemp = preguntaActualTemp + 1
+        if (preguntaActual < questions.length - 1) {
+            setPreguntaActual(preguntaActual + 1)
+        } else {
+            //alert('ya no hay preguntas.')
+
+
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Acabaste las preguntas!',
+                text: 'Puntaje final: ' + puntaje,
+                confirmButtonText: "Finalizar",
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  }
+
+            }).then(() => {
+
+                actualizarUsuario()
+
+
+
+                history('/')
+
+
+
+                
+            })
+
+
+            //actualizarUsuario()
+            //history('/')
+        }
+    }
+
+
+
+
+    const checkAnswer = (index) => {
+        if (questions[preguntaActual].correctAnswer === index) {
+
+            setPuntaje(puntaje + 1)
+            puntajeTemp = puntajeTemp + 1
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Bien!',
+                text: questions[preguntaActual].answers[questions[preguntaActual].correctAnswer],
+                confirmButtonText: "Siguiente"
+
+            }).then(() => {
+
+                siguientePregunta()
+            })
+
+        } else {
+
+
+
+            Swal.fire({
+                icon: 'error',
+                title: 'La respuesta correcta es:',
+                text: questions[preguntaActual].answers[questions[preguntaActual].correctAnswer],
+                confirmButtonText: "Siguiente"
+
+            }).then(() => {
+                siguientePregunta()
+            })
+
+        }
+    }
+
+
+
+
+
+    const validarSalaPage = async () => {
+        let respuesta = await validarSala(sala)
+        setEstado(respuesta)
+
+        if (respuesta.length === 0) {
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No existe ese id aun...',
+            })
+
+
+        } else {
+            let data = { Usuario: 'Adan', Cargo: 'Estudiante', ID: sala }
+            agregarUsuarioParticipante(data)
+        }
+    }
+
+
+
+
+
+
+    useEffect(() => {
+
+
+
+
+
+
+        return;
+    }, []);
+
+
+
+
+
+    return (
+        <>
+            <div style = {{alignItems: 'center', display: 'flex'}}>
+
+
+
+                <div align='center' style={{ backgroundColor: '#97CBEB', width: '105.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px' }}>
+                    <p style={{ fontSize: '24.5px' }}>Puntaje <br /><b>{puntaje}</b></p>
+                </div>
+
+
+
+                <div style={{ backgroundColor: 'white', width: '60%', borderRadius: '24.5px', marginTop: '37.5px', marginleft: '755px !important', marginRight: '55px', paddingBottom: '14.5px', textAlign: 'center', marginBottom: '54.5px' }}>
+
+                    <Button disabled={true} style={{ backgroundColor: 'transparent', width: '67.5px', height: '89.75px', fontSize: '24.5px', borderRadius: '9.75px', borderColor: 'red', textAlign: 'center', marginTop: '14.5px', border: '1.5px solid black' }} align='center'>
+                        <FcAlarmClock size={37} />
+                        <p style={{ color: 'black' }}>{tiempo}</p>
+                    </Button>
+
+
+                    <div id="instrucciones-texto">
+                        <p style={{ fontSize: '21.75px', fontWeight: 'bold', width: '85%', marginLeft: 'auto', marginRight: 'auto', marginTop: '14.5px', marginBottom: '27.5px' }}>{preguntaActual + 1 + ") "} {questions[preguntaActual].question}</p>
+
+
+
+
+                        <img src={questions[preguntaActual].imagen} style={{ width: '450px', marginBottom: '37.5px', marginTop: '19.5px' }} />
+                        <div>
+
+                            {questions[preguntaActual].answers.map((respuesta, index) => (
+
+                                <div>
+                                    <Button disabled = {preguntaActual === questions.length} className="botonOpcion" style={{ width: respuesta.length > 22 ? '475px' : '375px' }} onClick={() => { checkAnswer(index) }}>{respuesta}</Button>
+
+
+
+                                </div>
+
+                            ))
+
+                            }
+
+
+
+                        </div>
+
+                        
+
+
+
+
+
+
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </>
+    );
+}
