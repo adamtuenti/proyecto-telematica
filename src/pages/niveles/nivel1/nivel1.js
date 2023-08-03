@@ -143,7 +143,7 @@ export default function Nivel1() {
       Swal.fire({
         icon: 'success',
         title: 'Acabaste las preguntas!',
-        text: 'Puntaje: ' + puntaje + '/' + questions.length,
+        text: 'Puntaje: ' + puntaje + '/' + questions.length, //ejemplo
         confirmButtonText: "Siguiente nivel"
 
       }).then(() => {
