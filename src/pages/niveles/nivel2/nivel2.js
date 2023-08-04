@@ -50,7 +50,7 @@ export default function Nivel2() {
 
 
 
-    const [arrayImagenes, setArrayImagenes] = useState([pista1, pista2, pista3, pista4, pista5, pista6, pista6, pista7, pista8])
+    const [arrayImagenes, setArrayImagenes] = useState([pista1, pista2, pista3, pista4, pista5, pista6, pista7, pista8])
     const [array, setArray] = useState([])
     const [arrayPreguntasSet, setArrayPreguntasSet] = useState([{ text: 'Convertir la máscara de red a binario', id: 0 }, { text: 'Contar los bits de subred', id: 1 }, { text: 'Determinar cuántas subredes necesitamos', id: 2 }, { text: 'Calcular la cantidad de bits de subred necesarios', id: 3 }, { text: 'Encontrar la nueva máscara de subred', id: 4 }, { text: 'Calcular las direcciones de red de cada subred', id: 5 }, { text: 'Calcular la cantidad de hosts por subred', id: 6 }, { text: 'Asignar direcciones IP a dispositivos', id: 7 }])
 
