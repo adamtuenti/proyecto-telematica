@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-//import './login.css';
+
 import Select from 'react-select';
 import { useNavigate, useLocation } from "react-router-dom";
 import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
@@ -41,7 +41,7 @@ export default function Nivel1() {
 
   useEffect(() => {
     setUid(location.state.uid);
-    //alert(location.state.uid)
+    
   }, [])
 
 
@@ -136,14 +136,14 @@ export default function Nivel1() {
     if (preguntaActual < questions.length - 1) {
       setPreguntaActual(preguntaActual + 1)
     } else {
-      //alert('ya no hay preguntas.')
+      
 
 
 
       Swal.fire({
         icon: 'success',
         title: 'Acabaste las preguntas!',
-        text: 'Puntaje: ' + puntaje + '/' + questions.length, //ejemplo
+        text: 'Puntaje: ' + puntaje + '/' + questions.length, 
         confirmButtonText: "Siguiente nivel"
 
       }).then(() => {
@@ -152,8 +152,7 @@ export default function Nivel1() {
       })
 
 
-      //actualizarUsuario()
-      //history('/')
+      
     }
   }
 
@@ -251,7 +250,7 @@ export default function Nivel1() {
 
       console.log('cada: ', window.location.href, puntaje, paginaActual)
 
-      //a()
+      
 
 
 
@@ -280,9 +279,7 @@ export default function Nivel1() {
         
 
       }
-      /*
-          Run a function or set any state here
-      */
+    
     }, 1050);
 
 

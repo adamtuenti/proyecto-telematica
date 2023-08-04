@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-//import './login.css';
+
 import Select from 'react-select';
 import { useNavigate, useLocation } from "react-router-dom";
 import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
@@ -20,7 +20,7 @@ import imagen1 from './imagen1.jpg'
 import imagen2 from './imagen2.jpg'
 import imagen3 from './imagen3.jpg'
 import imagen4 from './imagen4.jpg'
-//import './nivel1.css'
+
 
 
 
@@ -47,7 +47,7 @@ export default function Nivel3() {
     useEffect(() => {
         setUid(location.state.uid);
         setPuntaje(location.state.puntos)
-        //alert(location.state.uid)
+        
     }, [])
 
 
@@ -62,7 +62,7 @@ export default function Nivel3() {
         console.log('actualizar: ', puntaje, puntajeTemp)
 
         actualizarParticipante(location.state.uid, puntajeTemp, 3)
-        //history('/nivel2', { state: { uid: location.state.uid } })
+        
 
 
 
@@ -116,7 +116,7 @@ export default function Nivel3() {
         if (preguntaActual < questions.length - 1) {
             setPreguntaActual(preguntaActual + 1)
         } else {
-            //alert('ya no hay preguntas.')
+            
 
 
 
@@ -146,8 +146,7 @@ export default function Nivel3() {
             })
 
 
-            //actualizarUsuario()
-            //history('/')
+            
         }
     }
 

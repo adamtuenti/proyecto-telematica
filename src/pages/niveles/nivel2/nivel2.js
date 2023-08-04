@@ -72,9 +72,7 @@ export default function Nivel2() {
 
 
         Swal.fire({
-            //title: 'Custom width, padding, color, background.',
-            //width: 600,
-            //padding: '3em',
+            
             color: 'transparent',
             background: 'transparent',
             showConfirmButton: false,
@@ -87,12 +85,7 @@ export default function Nivel2() {
         })
 
 
-        // Swal.fire({
-        //   imageUrl: pista1,
-        //imageHeight: 125,
-        //imagenWidth: 250,
-        // imageAlt: 'A tall image'
-        //})
+        
 
     }
 
@@ -106,10 +99,7 @@ export default function Nivel2() {
             arrayRespuestas.push(texto)
             let temp = [ ...array ]
             let data = {text: texto, id: valor}
-            //console.log('temp: ', temp)
-            //let ind = array.indexOf('')
-            //temp[ind] = texto
-            //setArray(temp)
+            
             temp.push(data)
             console.log(array, indice, texto, temp)
             setArray(temp)
@@ -123,10 +113,7 @@ export default function Nivel2() {
 
     const eliminarOpcion = (index) => {
         let temp = [ ...array ]
-            //console.log('temp: ', temp)
-            //let ind = array.indexOf('')
-            //temp[ind] = texto
-            //setArray(temp)
+            
             temp = temp.slice(0, -1)
             console.log(array, temp)
             setArray(temp)
@@ -148,7 +135,7 @@ export default function Nivel2() {
 
 
 
-        //alert(total)
+        
 
 
 
@@ -165,7 +152,7 @@ export default function Nivel2() {
             actualizarParticipante(location.state.uid, total, 2)
             history('/nivel3', {state: {puntos: total, uid: location.state.uid}})
     
-            //actualizarUsuario()
+            
           })
     }
 
