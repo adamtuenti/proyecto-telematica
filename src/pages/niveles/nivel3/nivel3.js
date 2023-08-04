@@ -18,6 +18,8 @@ import 'sweetalert2/src/sweetalert2.scss'
 
 import imagen1 from './imagen1.jpg'
 import imagen2 from './imagen2.jpg'
+import imagen3 from './imagen3.jpg'
+import imagen4 from './imagen4.jpg'
 //import './nivel1.css'
 
 
@@ -91,7 +93,20 @@ export default function Nivel3() {
             answers: ["A) Net A", "B) Net B", "C) Net C"],
             correctAnswer: 0,
             imagen: imagen2
+        },
+        {
+            question: "En la siguiente topología, en el que se le aplicó VLSM, para la red 2 ¿Cual es el valor de m?",
+            answers: ["A) 5", "B) 6", "C) 7"],
+            correctAnswer: 2,
+            imagen: imagen3
+        },
+        {
+            question: "En la siguiente topología, en el que se le aplicó VLSM, para la red 3 ¿Cual es el valor de m?",
+            answers: ["A) 5", "B) 6", "C) 7"],
+            correctAnswer: 2,
+            imagen: imagen4
         }
+
     ];
 
 
