@@ -59,7 +59,7 @@ export default function Nivel3() {
 
     const actualizarUsuario = () => {
 
-        console.log('actualizar: ', puntaje, puntajeTemp)
+        
 
         actualizarParticipante(location.state.uid, puntajeTemp, 3)
         
@@ -122,7 +122,7 @@ export default function Nivel3() {
 
             Swal.fire({
                 icon: 'success',
-                title: 'Acabaste las preguntas!',
+                title: 'Nivel 3 completado',
                 text: 'Puntaje final: ' + puntaje,
                 confirmButtonText: "Finalizar",
                 showClass: {
@@ -161,7 +161,7 @@ export default function Nivel3() {
 
             Swal.fire({
                 icon: 'success',
-                title: 'Bien!',
+                title: 'Correcto!',
                 text: questions[preguntaActual].answers[questions[preguntaActual].correctAnswer],
                 confirmButtonText: "Siguiente"
 

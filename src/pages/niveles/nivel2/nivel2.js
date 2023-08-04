@@ -58,7 +58,7 @@ export default function Nivel2() {
 
     useEffect(() => {
         setArrayPreguntasSet(arrayShuffle(arrayPreguntasSet))
-        console.log(arrayPreguntas)
+        
     }, [])
 
 
@@ -101,7 +101,7 @@ export default function Nivel2() {
             let data = {text: texto, id: valor}
             
             temp.push(data)
-            console.log(array, indice, texto, temp)
+            
             setArray(temp)
         }else{
             alert('listo')
@@ -115,7 +115,7 @@ export default function Nivel2() {
         let temp = [ ...array ]
             
             temp = temp.slice(0, -1)
-            console.log(array, temp)
+            
             setArray(temp)
     }
 
@@ -123,7 +123,7 @@ export default function Nivel2() {
 
     const verificarResultados = () => {
         let total = location.state.puntos;
-        console.log(array, arrayPasos)
+        
         for(let i = 0; i < array.length; i ++){
             let dataRespuesta = array[i]
             let dataCorrecto = arrayPasos[i]
@@ -141,7 +141,7 @@ export default function Nivel2() {
 
         Swal.fire({
             icon: 'success',
-            title: 'Acabaste las preguntas!',
+            title: 'Nivel 2 completado!',
             text: 'Puntaje: ' + total,
             confirmButtonText: "Siguiente nivel"
     

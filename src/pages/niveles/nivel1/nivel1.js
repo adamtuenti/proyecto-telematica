@@ -142,7 +142,7 @@ export default function Nivel1() {
 
       Swal.fire({
         icon: 'success',
-        title: 'Acabaste las preguntas!',
+        title: 'Nivel 1 completado!',
         text: 'Puntaje: ' + puntaje + '/' + questions.length, 
         confirmButtonText: "Siguiente nivel"
 
@@ -167,7 +167,7 @@ export default function Nivel1() {
 
       Swal.fire({
         icon: 'success',
-        title: 'Bien!',
+        title: 'Correcto!',
         text: questions[preguntaActual].answers[questions[preguntaActual].correctAnswer],
         confirmButtonText: "Siguiente"
 
@@ -256,7 +256,7 @@ export default function Nivel1() {
 
       console.log(preguntaActual, questions.length, preguntaActualTemp)
       if (preguntaActual === questions.length) {
-        console.log('entro aqui')
+        
         clearInterval(interval)
       }
 
@@ -265,11 +265,11 @@ export default function Nivel1() {
 
       if (tiempoA > 0) {
 
-        console.log('aqui: ', window.location.href)
+        
         setTiempo((tiempo) => tiempo - 1)
         tiempoA = tiempoA - 1
       } else {
-        console.log('aca: ', window.location.href)
+        
         clearInterval(interval)
 
         if(window.location.href === paginaActual){
