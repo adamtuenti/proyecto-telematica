@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './nivel2.css'
 import { Container, Col, Row, Button } from 'react-bootstrap';
-
-
-
 import { validarSala, agregarUsuarioParticipante, actualizarParticipante } from '../../../api/api';
-
-
-
 
 import pista1 from './pista1.jpg'
 import pista2 from './pista2.jpg'
@@ -18,27 +12,17 @@ import pista6 from './pista6.jpg'
 import pista7 from './pista7.jpg'
 import pista8 from './pista8.jpg'
 
-
-
 import { BsFillEyeFill } from "react-icons/bs";
 import { FiArchive } from "react-icons/fi";
 
-
-
 import { useNavigate, useLocation } from "react-router-dom";
-
-
 
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
-
 import arrayShuffle from 'array-shuffle';
 
-
-
 export default function Nivel2() {
-
 
 
     const location = useLocation()
@@ -48,12 +32,9 @@ export default function Nivel2() {
     let arrayPreguntas = [{ text: 'Convertir la máscara de red a binario', id: 0 }, { text: 'Contar los bits de subred', id: 1 }, { text: 'Determinar cuántas subredes necesitamos', id: 2 }, { text: 'Calcular la cantidad de bits de subred necesarios', id: 3 }, { text: 'Encontrar la nueva máscara de subred', id: 4 }, { text: 'Calcular las direcciones de red de cada subred', id: 5 }, { text: 'Calcular la cantidad de hosts por subred', id: 6 }, { text: 'Asignar direcciones IP a dispositivos', id: 7 }]
     let arrayRespuestas = []
 
-
-
     const [arrayImagenes, setArrayImagenes] = useState([pista1, pista2, pista3, pista4, pista5, pista6, pista7, pista8])
     const [array, setArray] = useState([])
     const [arrayPreguntasSet, setArrayPreguntasSet] = useState([{ text: 'Convertir la máscara de red a binario', id: 0 }, { text: 'Contar los bits de subred', id: 1 }, { text: 'Determinar cuántas subredes necesitamos', id: 2 }, { text: 'Calcular la cantidad de bits de subred necesarios', id: 3 }, { text: 'Encontrar la nueva máscara de subred', id: 4 }, { text: 'Calcular las direcciones de red de cada subred', id: 5 }, { text: 'Calcular la cantidad de hosts por subred', id: 6 }, { text: 'Asignar direcciones IP a dispositivos', id: 7 }])
-
 
 
     useEffect(() => {
@@ -62,14 +43,7 @@ export default function Nivel2() {
     }, [])
 
 
-
-
-
-
-
     const mostrarPista = (index) => {
-
-
 
         Swal.fire({
             
@@ -82,14 +56,9 @@ export default function Nivel2() {
               center
               no-repeat
             `
-        })
-
-
-        
+        })      
 
     }
-
-
 
 
 
@@ -105,8 +74,7 @@ export default function Nivel2() {
             setArray(temp)
         }else{
             alert('listo')
-        }
-        
+        }        
     }
 
     
@@ -130,14 +98,7 @@ export default function Nivel2() {
             if(dataRespuesta.id === dataCorrecto.idRespuesta){
                 total = total + 1
             }
-        }
-
-
-
-
-        
-
-
+        }      
 
         Swal.fire({
             icon: 'success',
@@ -146,18 +107,15 @@ export default function Nivel2() {
             confirmButtonText: "Siguiente nivel"
     
           }).then(() => {
-
-
-
             actualizarParticipante(location.state.uid, total, 2)
-            history('/nivel3', {state: {puntos: total, uid: location.state.uid}})
-    
-            
+            history('/instrucciones3', {state: {puntos: total, uid: location.state.uid}})              
           })
     }
 
 
+
     return (
+<<<<<<< HEAD
 
 
         <>
@@ -258,22 +216,104 @@ export default function Nivel2() {
 
 
 
+=======
+      <>
+        <div
+          style={{
+            width: "85%",
+            backgroundColor: "white",
+            marginTop: "45px",
+            padding: "27.5px",
+            borderRadius: "7.5px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <p
+            style={{
+              textAlign: "center",
+              fontSize: "24.5px",
+              fontWeight: "bold",
+              marginBottom: "24.5px",
+            }}
+          >
+            Pasos del subneting!
+          </p>
+
+          <Row style={{ width: "98.5%" }}>
+            <Col lg={6}>
+              {arrayPasos.map((valor, index) => (
+                <Row style={{ height: "57.5px" }}>
+                  <Col lg={2}>
+                    <Row>
+                      <Col>
+                        {index === array.length && (
+                          <BsFillEyeFill
+                            onClick={() => {
+                              mostrarPista(index);
+                            }}
+                            color="green"
+                          />
+                        )}
+                        {index >= 1 && index + 1 === array.length && (
+                          <FiArchive
+                            onClick={() => {
+                              eliminarOpcion(index);
+                            }}
+                            color="red"
+                          />
+                        )}
+                      </Col>
+
+                      <Col>
+                        <p style={{ color: "black", fontWeight: "bold" }}>
+                          {valor.text}
+                        </p>
+                      </Col>
+                    </Row>
+                  </Col>
+
+                  <Col style={{ textAlign: "left" }}>
+                    {array.length >= 1 && index < array.length && (
+                      <p>{array[index].text}</p>
+                    )}
+                  </Col>
+>>>>>>> ab93ff4b21ce15f3542d71d703f9f8f9d31497f9
                 </Row>
+              ))}
+            </Col>
 
+            <Col lg={6}>
+              {arrayPreguntasSet.map((pregunta, index) => (
+                <Button
+                  disabled={array.length == arrayPreguntasSet.length}
+                  style={{
+                    width: "97.5%",
+                    height: "45px",
+                    marginBottom: "12.5px",
+                    fontSize: "19.5px",
+                  }}
+                  onClick={() => {
+                    rellenarRespuesta(index, pregunta.text, pregunta.id);
+                  }}
+                >
+                  {pregunta.text} {array.length}
+                </Button>
+              ))}
+            </Col>
+          </Row>
 
-                
-
-
-                
-                {array.length === arrayPreguntasSet.length && <Button onClick = {() => {verificarResultados()}}>Terminar</Button>}
-
-
-
-            </div>
-
-
-
-        </>
-    )
+          {array.length === arrayPreguntasSet.length && (
+            <Button
+              onClick={() => {
+                verificarResultados();
+              }}
+            >
+              Terminar
+            </Button>
+          )}
+        </div>
+      </>
+    );
 
 }
