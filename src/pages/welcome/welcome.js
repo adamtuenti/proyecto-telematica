@@ -4,11 +4,21 @@ import { useNavigate  } from "react-router-dom";
 
 
 
+import axios from 'axios'
+
+
+
 export default function Welcome () {
 
 
 
   const history = useNavigate ();
+
+
+
+  useEffect(async () =>  {
+    console.log(await axios.get('https://geolocation-db.com/json/'))
+  })
 
 
 

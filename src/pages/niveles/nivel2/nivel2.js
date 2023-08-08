@@ -141,7 +141,7 @@ export default function Nivel2() {
 
         Swal.fire({
             icon: 'success',
-            title: 'Nivel 2 completado!',
+            title: '¡Nivel 2 completado!',
             text: 'Puntaje: ' + total,
             confirmButtonText: "Siguiente nivel"
     
@@ -247,7 +247,7 @@ export default function Nivel2() {
 
 
 
-                                <Button disabled = {array.length == arrayPreguntasSet.length} style={{ width: '97.5%', height: '45px', marginBottom: '12.5px', fontSize: '19.5px' }} onClick={() => { rellenarRespuesta(index, pregunta.text, pregunta.id) }}>{pregunta.text} {array.length}</Button>
+                                <Button disabled = {array.length == arrayPreguntasSet.length} style={{ width: '97.5%', height: '45px', marginBottom: '12.5px', fontSize: '19.5px' }} onClick={() => { rellenarRespuesta(index, pregunta.text, pregunta.id) }}>{pregunta.text}</Button>
 
                             ))
                         }

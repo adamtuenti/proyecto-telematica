@@ -61,7 +61,7 @@ export default function Nivel3() {
 
         
 
-        actualizarParticipante(location.state.uid, puntajeTemp, 3)
+        actualizarParticipante(location.state.uid, puntaje, 3)
         
 
 
@@ -122,8 +122,8 @@ export default function Nivel3() {
 
             Swal.fire({
                 icon: 'success',
-                title: 'Nivel 3 completado',
-                text: 'Puntaje final: ' + puntaje,
+                title: '¡Nivel 3 completado!',
+                text: 'Puntaje final: ' + puntaje + ': ' + puntajeTemp,
                 confirmButtonText: "Finalizar",
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'

@@ -228,8 +228,8 @@ export default function Nivel1() {
   const tiempoTerminado = () => {
     Swal.fire({
       icon: 'info',
-      title: 'Se acabó el tiempo!',
-      text: 'Puntaje: ' + puntaje + '/' + questions.length,
+      title: '¡Se acabó el tiempo!',
+      text: 'Puntaje: ' + puntaje,
       confirmButtonText: "Siguiente nivel"
 
     }).then(() => {
@@ -248,7 +248,7 @@ export default function Nivel1() {
     interval = setInterval(() => {
 
 
-      console.log('cada: ', window.location.href, puntaje, paginaActual)
+      console.log('cada: ', window.location.href, puntaje, paginaActual, puntajeTemp)
 
       
 
@@ -256,6 +256,7 @@ export default function Nivel1() {
 
       console.log(preguntaActual, questions.length, preguntaActualTemp)
       if (preguntaActual === questions.length) {
+        console.log('holati')
         
         clearInterval(interval)
       }
@@ -298,7 +299,7 @@ export default function Nivel1() {
 
 
         <div align='center' style={{ backgroundColor: '#97CBEB', width: '105.5px', marginLeft: 'auto', marginRight: 'auto', marginTop: '24.5px', borderRadius: '7.5px', padding: '3.5px' }}>
-          <p style={{ fontSize: '24.5px' }}>Puntaje <br /><b>{puntaje} {preguntaActual} {preguntaActualTemp}</b></p>
+          <p style={{ fontSize: '24.5px' }}>Puntaje <br /><b>{puntaje}</b></p>
         </div>
 
         <div align='center' style={{}}>
