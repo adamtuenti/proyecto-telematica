@@ -7,6 +7,9 @@ import UserList from "./pages/user-list/user-list";
 import Nivel1 from "./pages/niveles/nivel1/nivel1";
 import Nivel2 from "./pages/niveles/nivel2/nivel2";
 import Nivel3 from "./pages/niveles/nivel3/nivel3";
+import InstruccionesNivel1 from "./pages/niveles/nivel1/InstruccionesNivel1.js";
+import InstruccionesNivel2 from "./pages/niveles/nivel2/InstruccionesNivel2";
+import InstruccionesNivel3 from "./pages/niveles/nivel3/InstruccionesNivel3";
 
 
 
@@ -24,6 +27,10 @@ const RouterPage = () => {
                 <Route exact path = '/nivel1' element = {<Nivel1/>} />
                 <Route exact path = '/nivel2' element = {<Nivel2/>} />
                 <Route exact path = '/nivel3' element = {<Nivel3/>} />
+                <Route exact path='/instrucciones1' element={<InstruccionesNivel1 />} />
+                <Route exact path="/instrucciones2" element={<InstruccionesNivel2 />} />
+                <Route exact path="/instrucciones3" element={<InstruccionesNivel3 />} />
+
             </Routes>
 
 

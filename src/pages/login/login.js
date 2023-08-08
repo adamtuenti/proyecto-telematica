@@ -4,7 +4,6 @@ import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
 
 
-
 import { Container, Col, Row, Button } from 'react-bootstrap';
 
 
@@ -59,12 +58,9 @@ export default function Login() {
             <Select style = {{width: '75%'}} placeholder = 'Seleccione su rol...' options={options} onChange={(text) => { setCargo(text.value) }} />
 
 </div>
-
           </div>
 
           <Button disabled={nombre === '' || cargo === ''} onClick={() => { cambiarPestana() }} id="iniciar">INICIAR</Button>
-
-
 
         </section>
 
