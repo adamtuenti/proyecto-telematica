@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import './instrucciones1.css';
 
 export default function InstruccionesNivel1() {
 
+    const history = useNavigate();
     const location = useLocation();
 
     return (
@@ -38,9 +39,9 @@ export default function InstruccionesNivel1() {
             <p className="instrucciones-text">
                 Una vez que te sientas preparado, haz clic en el botón 'JUGAR' para iniciar el desafío.
             </p>
-            <Link to="/nivel1" state={location.state}>
-                <Button className="instrucciones-button">JUGAR</Button>
-            </Link>
+            
+                <Button onClick = {() => {history('/nivel1', {state: {uid: location.state.uid}})}} className="instrucciones-button">JUGAR</Button>
+            
         </div>
     );
 }

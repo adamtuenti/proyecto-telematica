@@ -38,8 +38,9 @@ export default function Nivel3() {
 
 
 
-    const actualizarUsuario = () => {       
-        actualizarParticipante(location.state.uid, puntajeTemp, 3)    
+    const actualizarUsuario = () => {    
+      console.log('puntaje: ', puntaje, puntajeTemp)   
+        actualizarParticipante(location.state.uid, puntaje, 3)    
     }
 
 
@@ -89,7 +90,7 @@ export default function Nivel3() {
             Swal.fire({
                 icon: 'success',
                 title: '¡Nivel 3 completado!',
-                text: 'Puntaje final: ' + puntaje + ': ' + puntajeTemp,
+                text: 'Puntaje final: ' + puntaje,
                 confirmButtonText: "Finalizar",
                 showClass: {
                     popup: 'animate__animated animate__fadeInDown'
@@ -135,6 +136,10 @@ export default function Nivel3() {
                 siguientePregunta()
             })
         }
+
+
+
+        console.log('puntaje: ', puntaje, puntajeTemp)
     }
 
 
@@ -193,29 +198,11 @@ export default function Nivel3() {
               marginTop: "37.5px",
               marginleft: "755px !important",
               marginRight: "55px",
-              paddingBottom: "14.5px",
+              paddingBottom: "24.7px",
               textAlign: "center",
               marginBottom: "54.5px",
             }}
           >
-            <Button
-              disabled={true}
-              style={{
-                backgroundColor: "transparent",
-                width: "67.5px",
-                height: "89.75px",
-                fontSize: "24.5px",
-                borderRadius: "9.75px",
-                borderColor: "red",
-                textAlign: "center",
-                marginTop: "14.5px",
-                border: "1.5px solid black",
-              }}
-              align="center"
-            >
-              <FcAlarmClock size={37} />
-              <p style={{ color: "black" }}>{tiempo}</p>
-            </Button>
 
             <div id="instrucciones-texto">
               <p
@@ -225,7 +212,7 @@ export default function Nivel3() {
                   width: "85%",
                   marginLeft: "auto",
                   marginRight: "auto",
-                  marginTop: "14.5px",
+                  marginTop: "37.5px",
                   marginBottom: "27.5px",
                 }}
               >

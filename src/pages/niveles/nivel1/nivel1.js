@@ -8,22 +8,28 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import './nivel1.css'
 
+import { tiempoNivel1 } from "../../../variables"
+
 
 export default function Nivel1() {
 
   const history = useNavigate();
   const location = useLocation()
 
-  const [tiempo, setTiempo] = useState(15)
+  const [tiempo, setTiempo] = useState(tiempoNivel1)
   const [uid, setUid] = useState('')
-  let tiempoA = 15
+  let tiempoA = tiempoNivel1
+  const inicial = tiempoNivel1
+
+
+  let tiempoHola = 15
 
   const [puntaje, setPuntaje] = useState(0)
   let puntajeTemp = 0
 
 
   useEffect(() => {
-    setUid(location.state.uid);    
+    setUid(location.state.uid);
   }, [])
 
 
@@ -64,7 +70,7 @@ export default function Nivel1() {
     },
     {
       question: "¿Cuál es el formato de una dirección IP válida en IPv4?",
-      answers: ["A) 192.168.0.256 ", "B) 2001:0db8:85a3:0000:0000:8a2e:0370:7334", "C) 172.31.0.1", "D) ::1"],
+      answers: ["A) 192.168.0.256 ", "B) 2001:0db8:85a3:0000:0000", "C) 172.31.0.1", "D) ::1"],
       correctAnswer: 2
     },
     {
@@ -106,7 +112,7 @@ export default function Nivel1() {
       Swal.fire({
         icon: "success",
         title: "Nivel 1 completado!",
-        text: "Puntaje: " + puntaje + "/" + questions.length,
+        //text: "Puntaje: " + puntaje + ": " + puntajeTemp,
         confirmButtonText: "Siguiente nivel",
       }).then(() => {
         actualizarUsuario();
@@ -116,11 +122,53 @@ export default function Nivel1() {
 
 
 
+  const checkTime = (preguntaActual) => {
+
+    console.log(preguntaActual, tiempo, tiempoA)
+
+    let contarTiempo = inicial - (tiempo)
+
+    console.log('tiempo: ', contarTiempo)
+    if (preguntaActual === 0 && contarTiempo < 10) {
+      return 6
+    }
+    else if (preguntaActual === 1 && contarTiempo < 20) {
+      return 5
+    }
+    else if (preguntaActual === 2 && contarTiempo < 30) {
+      return 7
+    }
+    else if (preguntaActual === 3 && contarTiempo < 40) {
+      return 5
+    }
+    else if (preguntaActual === 4 && contarTiempo < 45) {
+      return 4
+    }
+    else if (preguntaActual === 5 && contarTiempo < 52) {
+      return 7
+    }
+    else if (preguntaActual === 3 && contarTiempo < 40) {
+      return 5
+    }
+
+    return 1
+  }
+
+
+
   const checkAnswer = (index) => {
+
+    console.log('estamos aca')
     if (questions[preguntaActual].correctAnswer === index) {
 
-      setPuntaje(puntaje + 1)
-      puntajeTemp = puntajeTemp + 1
+      let sumar = checkTime(preguntaActual)
+
+
+
+      console.log('sumar: ', sumar)
+
+      setPuntaje(puntaje + sumar)
+      puntajeTemp = puntajeTemp + sumar
 
       Swal.fire({
         icon: 'success',
@@ -185,11 +233,11 @@ export default function Nivel1() {
       confirmButtonText: "Siguiente nivel"
 
     }).then(() => {
-      actualizarUsuario()      
+      actualizarUsuario()
     })
   }
 
-  
+
   let interval;
 
 
@@ -197,34 +245,49 @@ export default function Nivel1() {
 
     interval = setInterval(() => {
 
-
-      console.log('cada: ', window.location.href, puntaje, paginaActual, puntajeTemp)
-
-      
+      tiempoHola = tiempoHola - 1
 
 
 
-      console.log(preguntaActual, questions.length, preguntaActualTemp)
-      if (preguntaActual === questions.length) {
-        console.log('holati')
-        
-        clearInterval(interval)
-      }
+      if (window.location.href === paginaActual) {
 
-      if (tiempoA > 0) {        
-        setTiempo((tiempo) => tiempo - 1)
-        tiempoA = tiempoA - 1
-      } else {        
-        clearInterval(interval)
-        if(window.location.href === paginaActual){
+
+        //console.log('cada: ', window.location.href, puntaje, paginaActual, puntajeTemp)
+
+
+
+
+
+        console.log(preguntaActual, questions.length, preguntaActualTemp, puntaje, puntajeTemp, document.getElementById("puntaje"), puntaje.current, tiempoHola)
+        if (preguntaActual === questions.length) {
+          console.log('holati')
+
+          clearInterval(interval)
+        }
+
+        if (tiempoA > 0) {
+          setTiempo((tiempo) => tiempo - 1)
+          tiempoA = tiempoA - 1
+        } else {
+          clearInterval(interval)
+
           tiempoTerminado()
         }
       }
-    
+
+
+
+
+      else {
+        clearInterval(interval)
+
+        //tiempoTerminado()
+      }
+
     }, 1050);
 
-    return;
-  }, []);
+    //return;
+  }, [puntaje, puntajeTemp, tiempoHola]);
 
 
 
@@ -245,8 +308,8 @@ export default function Nivel1() {
               width: "59.5%",
               borderRadius: "24.5px",
               marginTop: "37.5px",
-              marginleft: "125px",
-              marginRight: "75px",
+              //marginleft: "125px",
+              //marginRight: "75px",
               paddingBottom: "14.5px",
             }}
           >
@@ -289,7 +352,7 @@ export default function Nivel1() {
                     <Button
                       className="botonOpcion"
                       style={{
-                        width: respuesta.length > 22 ? "475px" : "375px",
+                        width: "475px",//respuesta.length > 28 ? "475px" : "375px",
                       }}
                       onClick={() => {
                         checkAnswer(index);

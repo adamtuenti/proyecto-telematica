@@ -115,108 +115,6 @@ export default function Nivel2() {
 
 
     return (
-<<<<<<< HEAD
-
-
-        <>
-
-
-
-            <div style={{ width: '85%', backgroundColor: 'white', marginTop: '45px', padding: '27.5px', borderRadius: '7.5px', marginLeft: 'auto', marginRight: 'auto' }}>
-
-                <p style={{ textAlign: 'center', fontSize: '24.5px', fontWeight: 'bold', marginBottom: '24.5px' }}>Pasos del subneting!</p>
-
-                <Row style={{ width: '98.5%' }}>
-
-
-
-                    <Col lg={6}>
-
-                        {arrayPasos.map((valor, index) => (
-                            <Row style={{ height: '57.5px' }}>
-
-
-                                <Col lg={2}>
-
-                                    <Row>
-
-                                        
-
-
-
-                                        <Col>
-
-                                            {index === array.length && <BsFillEyeFill onClick={() => { mostrarPista(index) }} color = 'green'/>}
-                                            {(index >= 1 && index + 1 === array.length) && <FiArchive onClick={() => { eliminarOpcion(index) }} color = 'red'/>}
-
-
-
-                                        </Col>
-
-
-
-                                        <Col>
-
-                                            <p  style={{ color: 'black', fontWeight: 'bold' }}>{valor.text}</p>
-
-
-
-
-
-                                        </Col>
-
-
-                                    </Row>
-                                </Col>
-
-
-
-                                <Col style={{ textAlign: 'left' }}>
-                                    {(array.length >= 1 && index < array.length) && <p>{array[index].text}</p>}
-
-
-
-                                    
-
-
-
-
-
-                                </Col>
-                            </Row>
-                        ))
-
-
-
-                        }
-
-                    </Col>
-
-
-
-
-                    <Col lg={6}>
-
-
-
-
-                        {
-                            arrayPreguntasSet.map((pregunta, index) => (
-
-
-
-                                <Button disabled = {array.length == arrayPreguntasSet.length} style={{ width: '97.5%', height: '45px', marginBottom: '12.5px', fontSize: '19.5px' }} onClick={() => { rellenarRespuesta(index, pregunta.text, pregunta.id) }}>{pregunta.text}</Button>
-
-                            ))
-                        }
-
-
-
-                    </Col>
-
-
-
-=======
       <>
         <div
           style={{
@@ -278,7 +176,6 @@ export default function Nivel2() {
                       <p>{array[index].text}</p>
                     )}
                   </Col>
->>>>>>> ab93ff4b21ce15f3542d71d703f9f8f9d31497f9
                 </Row>
               ))}
             </Col>
@@ -297,7 +194,7 @@ export default function Nivel2() {
                     rellenarRespuesta(index, pregunta.text, pregunta.id);
                   }}
                 >
-                  {pregunta.text} {array.length}
+                  {pregunta.text}
                 </Button>
               ))}
             </Col>

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './welcome.css';
 import { useNavigate  } from "react-router-dom";
 
 
 
-import axios from 'axios'
+//import axios from 'axios'
 
 
 
@@ -16,9 +16,9 @@ export default function Welcome () {
 
 
 
-  useEffect(async () =>  {
-    console.log(await axios.get('https://geolocation-db.com/json/'))
-  })
+  //useEffect(async () =>  {
+    //onsole.log(await axios.get('https://geolocation-db.com/json/'))
+  //})
 
 
 
